@@ -20,10 +20,45 @@ services:
 volumes:
   postgres_data:
 
+create serverconnection
 docker run -it \
   -e POSTGRES_USER="myuser" \
   -e POSTGRES_PASSWORD="mypassword" \
   -e POSTGRES_DB="ny_taxi" \
   -v d:/data_eng/Zoomcamp_25/ny_taxi_postgres_data:/var/lib/postgresql/data \
   -p 5432:5432 \
-  postgres:13
+  postgres:15
+
+  codepace -v /workspaces/Zoomcamp_25/ny_taxi_postgres_data:/var/lib/postgresql/data \
+
+
+  pdadmin 
+docker run -d \
+  --name pgadmin \
+  -e PGADMIN_DEFAULT_EMAIL="myuser@admin.com" \
+  -e PGADMIN_DEFAULT_PASSWORD="mypass" \
+  -p 8080:80 \
+  dpage/pgadmin4
+
+
+##docker network
+docker network create pg-network
+
+docker run -it \
+  -e POSTGRES_USER="myuser" \
+  -e POSTGRES_PASSWORD="mypassword" \
+  -e POSTGRES_DB="ny_taxi" \
+  -v /workspaces/Zoomcamp_25/ny_taxi_postgres_data:/var/lib/postgresql/data \
+  -p 5432:5432 \
+  --network=pg-network \
+  --name pg-database \
+  postgres:15
+
+  docker run -d \
+  --name pgadmin \
+  -e PGADMIN_DEFAULT_EMAIL="myuser@admin.com" \
+  -e PGADMIN_DEFAULT_PASSWORD="mypass" \
+  -p 8080:80 \
+  --network=pg-network \
+  --name pgadmin-2 \
+  dpage/pgadmin4
