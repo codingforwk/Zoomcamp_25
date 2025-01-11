@@ -62,3 +62,31 @@ docker run -it \
   --network=pg-network \
   --name pgadmin-2 \
   dpage/pgadmin4
+
+  URL = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet"
+  
+  python ingest_data.py \
+    --user=myuser
+    --password=mypassword
+    --host=localhost
+    --port=5432
+    --database=ny_taxi
+    --table_name=yellow_taxi_trips
+    --url=${URL}
+
+docker build -t taxi_injest:v001 .
+
+
+docker run -it \
+--network=pg-network\
+ taxi_injest:v001 \ 
+ --user=myuser \
+ --password=mypassword \
+ --host=localhost \
+ --port=5432 \
+ --database=ny_taxi \
+ --table_name=yellow_taxi_trips \
+ --url= "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet"
+
+
+
