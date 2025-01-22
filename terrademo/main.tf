@@ -1,20 +1,21 @@
 terraform {
   required_providers {
     google = {
-        source = "hashicorp/google"
-        version = "5.6.0"
+      source  = "hashicorp/google"
+      version = "5.6.0"
     }
   }
 }
 
 provider "google" {
-    project = "carbide-crowbar-448318-b0"
-    region = "EU"
-  }
+  credentials = file(var.credentials)
+  project     = var.project
+  region      = var.region
+}
 
 resource "google_storage_bucket" "demo-bucket" {
-  name          = "carbide-crowbar-448318-b0-terra-bucket"  
-  location      = "EU"                       
+  name          = var.gcs_bucket_name
+  location      = var.location
   force_destroy = true
 
   lifecycle_rule {
@@ -25,4 +26,9 @@ resource "google_storage_bucket" "demo-bucket" {
       type = "AbortIncompleteMultipartUpload"
     }
   }
+}
+
+resource "google_bigquery_dataset" "demo_dataset" {
+  dataset_id = var.bq_dataset_name
+  location   = var.location
 }

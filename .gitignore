@@ -40,6 +40,7 @@ terraform.rc
 # Ignore Google Cloud SDK files
 google-cloud-sdk/
 
+
 # Ignore Python-related files
 __pycache__/
 *.pyc
@@ -54,3 +55,4 @@ ny_taxi_postgres_data/
 # Ignore build artifacts
 _build/
 *.log
+google-cloud-sdk-*.tar.gz
