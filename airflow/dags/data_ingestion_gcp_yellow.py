@@ -16,8 +16,8 @@ import pyarrow.parquet
 
 
 # Make sure the values ​​match your gcp values
-PROJECT_ID="zoomcamp-airflow-444903"
-BUCKET="zoomcamp_datalake"
+PROJECT_ID="zoomcamp-airflow-449910"
+BUCKET="datalake_for_airflow"
 BIGQUERY_DATASET = "airflow2025b"
 path_to_local_home = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
 
