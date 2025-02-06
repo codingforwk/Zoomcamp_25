@@ -11,8 +11,8 @@ import shutil
 
 
 # This info is from docker-compose-lesson1.yaml
-user = "root2"
-password = "root2"
+user = "myuser"
+password = "mypassword"
 host = "pgdatabase"
 port = "5432"
 db = "ny_taxi"
