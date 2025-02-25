@@ -1,0 +1,45 @@
+
+CREATE OR REPLACE EXTERNAL TABLE hw3-project-452014.home3.external_yellow_2024
+OPTIONS(
+  FORMAT='PARQUET',
+  URIS=['gs://project_hw3_2025/*']
+)
+
+
+CREATE OR REPLACE TABLE hw3-project-452014.home3.native_yellow_2024
+AS(
+  SELECT * FROM `hw3-project-452014.home3.external_yellow_2024`
+)
+
+select count(*)
+from `home3.native_yellow_2024`
+
+
+select count(distinct PULocationID)
+from `home3.native_yellow_2024`
+
+select count(distinct PULocationID)
+from `home3.external_yellow_2024`
+
+select PULocationID
+from `home3.native_yellow_2024`
+
+
+select count(fare_amount)
+from `home3.native_yellow_2024`
+where fare_amount = 0
+
+
+create or replace table hw3-project-452014.home3.parth_yellow_2024
+partition by date(tpep_pickup_datetime)
+cluster by VendorID
+as (
+select * from hw3-project-452014.home3.native_yellow_2024
+)
+
+select distinct VendorID
+from `hw3-project-452014.home3.parth_yellow_2024`
+where tpep_pickup_datetime >='2024-03-01' and tpep_pickup_datetime <= '2024-03-15'
+
+
+
