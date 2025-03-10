@@ -37,6 +37,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 *.json
+*.parquet
 
 
 # Ignore Google Cloud SDK files
@@ -58,3 +59,4 @@ ny_taxi_postgres_data/
 _build/
 *.log
 google-cloud-sdk-*.tar.gz
+
